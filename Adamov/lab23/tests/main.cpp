@@ -5,44 +5,41 @@
 
 int main() {
     {
-        Tree<int64_t> tree(8);
-        tree.insert_node(tree.get_root(), 5);
-        tree.insert_node(tree.get_root(), 11);
-        tree.insert_node(tree.get_root(), 2);
-        tree.insert_node(tree.get_root(), 1);
-        tree.insert_node(tree.get_root(), 9);
-        tree.insert_node(tree.get_root(), 8);
-        tree.insert_node(tree.get_root(), 12);
-
-        tree.print_tree(tree.get_root());
-        Node<int64_t>* minimal = tree.get_min_depth_node(tree.get_root());
+        Tree<int> tree(5);
+        tree.insert(11);
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(9);
+        tree.insert(8);
+        tree.insert(12);
+        tree.print_tree();
+        Node<int>* minimal = tree.get_min_depth_node();
         std::cout << "Answer: " << minimal->get_data() << "\n\n";
     }
     {
-        Tree<int64_t> tree(15);
-        tree.insert_node(tree.get_root(), 10);
-        tree.insert_node(tree.get_root(), 12);
-        tree.insert_node(tree.get_root(), 14);
-        tree.insert_node(tree.get_root(), 8);
-        tree.insert_node(tree.get_root(), 4);
-        tree.insert_node(tree.get_root(), 9);
-        tree.insert_node(tree.get_root(), 18);
-
-        tree.print_tree(tree.get_root());
-        Node<int64_t>* minimal = tree.get_min_depth_node(tree.get_root());
+        Tree<int> tree(15);
+        tree.insert(10);
+        tree.insert(12);
+        tree.insert(14);
+        tree.insert(8);
+        tree.insert(4);
+        tree.insert(9);
+        tree.insert(18);
+        tree.print_tree();
+        Node<int>* minimal = tree.get_min_depth_node();
         std::cout << "Answer: " << minimal->get_data() << "\n\n";
     }
     {
-        Tree<int64_t> tree(4);
-        tree.insert_node(tree.get_root(), 6);
-        tree.insert_node(tree.get_root(), 5);
-        tree.insert_node(tree.get_root(), 8);
-        tree.insert_node(tree.get_root(), 7);
-        tree.insert_node(tree.get_root(), 9);
-        tree.insert_node(tree.get_root(), 3);
-
-        tree.print_tree(tree.get_root());
-        Node<int64_t>* minimal = tree.get_min_depth_node(tree.get_root());
+        Tree<int> tree(4);
+        tree.insert(3);
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(8);
+        tree.insert(7);
+        tree.insert(9);
+        tree.insert(6);
+        tree.print_tree();
+        Node<int>* minimal = tree.get_min_depth_node();
         std::cout << "Answer: " << minimal->get_data() << '\n';
     }
 }

@@ -13,14 +13,12 @@ public:
 
     Node<T>* get_root();
 
-    void insert_node(Node<T>* pred, const T& new_data);
-    Node<T>* get_min_node(Node<T>* node);
-    Node<T>* delete_node(Node<T>* node, const T& data);
-    void print_tree(Node<T>* node) const;
+    void insert(const T& new_data);
+    void delete_node(const T& data);
+    void print_tree() const;
     void bypass() const;
 
-    Node<T>* get_min_depth_node(Node<T>* node);
-    Node<T>* bypass_min_depth_node(Node<T>* node, Node<T>* min_depth_node);
+    Node<T>* get_min_depth_node() const;
 
     void delete_tree(Node<T>* node);
     ~Tree();
