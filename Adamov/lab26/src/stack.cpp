@@ -1,4 +1,5 @@
 #include "../include/stack.hpp"
+#include <climits>
 #include <stdexcept>
 
 template<typename T>
@@ -40,8 +41,10 @@ bool Stack<T>::empty() {
 
 template<typename T>
 void Stack<T>::delete_max() {
+    if (typeid(T) != typeid(int))
+        return;
     Stack<int> dop;
-    int max_val = -10000;
+    int max_val = INT_MIN;
     while (!this->empty()) {
         int tmp = this->pop();
         if (tmp > max_val) {
