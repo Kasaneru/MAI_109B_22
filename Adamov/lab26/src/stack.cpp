@@ -39,10 +39,8 @@ bool Stack<T>::empty() {
     return vec.empty();
 }
 
-template<typename T>
-void Stack<T>::delete_max() {
-    if (typeid(T) != typeid(int))
-        return;
+template<>
+void Stack<int>::delete_max() {
     Stack<int> dop;
     int max_val = INT_MIN;
     while (!this->empty()) {

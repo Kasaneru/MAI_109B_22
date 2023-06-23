@@ -1,7 +1,7 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include "vector.hpp"
+#include "../../KP7/include/vector.hpp"
 
 template<typename T>
 class Stack {
