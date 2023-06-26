@@ -30,11 +30,9 @@ Iterator<T> Iterator<T>::operator++() {
 
 template<typename T>
 Iterator<T> Iterator<T>::operator+(size_t sz) {
-    if (sz > 0) {
-        while (sz and node) {
-            node = node->next;
-            --sz;
-        }
+    while (sz > 0) {
+        node = node->next;
+        --sz;
     }
     return *this;
 }

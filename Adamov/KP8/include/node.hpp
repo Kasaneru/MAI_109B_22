@@ -8,7 +8,6 @@ class Iterator;
 
 template<typename T>
 class Node {
-    friend class List<T>;
     friend class Iterator<T>;
 private:
     T data;
@@ -18,6 +17,11 @@ public:
     Node() = default;
     explicit Node(const T& _data);
     Node(const T& _data, Node* _next);
+
+    T get_data();
+    Node* get_next();
+    void set_next(Node<T>* _next);
+
     ~Node() = default;
 };
 

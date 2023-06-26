@@ -15,8 +15,8 @@ Iterator<T> List<T>::begin() {
 template<typename T>
 Iterator<T> List<T>::end() {
     Node<T>* last_node = head;
-    while (last_node->next != head) {
-        last_node = last_node->next;
+    while (last_node->get_next() != head) {
+        last_node = last_node->get_next();
     }
     return Iterator<T>(last_node);
 }
@@ -25,13 +25,13 @@ template<typename T>
 void List<T>::push_back(const T& data) {
     if (head == nullptr) {
         head = new Node<T>(data);
-        head->next = head;
+        head->set_next(head);
         ++sz;
         return;
     }
     Node<T>* last_node = this->end().get_node();
     Node<T>* new_node = new Node<T>(data, head);
-    last_node->next = new_node;
+    last_node->set_next(new_node);
     ++sz;
 }
 
@@ -39,14 +39,14 @@ template<typename T>
 void List<T>::push_front(const T& data) {
     if (head == nullptr) {
         head = new Node<T>(data);
-        head->next = head;
+        head->set_next(head);
         ++sz;
         return;
     }
     Node<T>* last_node = this->end().get_node();
     Node<T>* new_node = new Node<T>(data, head);
     head = new_node;
-    last_node->next = head;
+    last_node->set_next(head);
     ++sz;
 }
 
@@ -74,13 +74,13 @@ void List<T>::pop_back() {
         return;
     }
     Node<T>* pred_last_node = head;
-    while (pred_last_node->next->next != head) {
-        pred_last_node = pred_last_node->next;
+    while (pred_last_node->get_next()->get_next() != head) {
+        pred_last_node = pred_last_node->get_next();
     }
-    Node<T>* last_node = pred_last_node->next;
+    Node<T>* last_node = pred_last_node->get_next();
 
     delete last_node;
-    pred_last_node->next = head;
+    pred_last_node->set_next(head);
     --sz;
 }
 
@@ -95,24 +95,24 @@ void List<T>::pop_front() {
         --sz;
         return;
     }
-    Node<T>* new_head = head->next;
+    Node<T>* new_head = head->get_next();
     Node<T>* last_node = this->end().get_node();
     delete head;
     head = new_head;
-    last_node->next = head;
+    last_node->set_next(head);
     --sz;
 }
 
 template<typename T>
 void List<T>::insert(const Iterator<T>& pos, const T& data) {
-    pos.get_node()->next = new Node<T>(data, pos.get_node()->next);
+    pos.get_node()->set_next(new Node<T>(data, pos.get_node()->get_next()));
 }
 
 template<typename T>
 void List<T>::erase(const Iterator<T>& begin_pos, const Iterator<T>& end_pos) {
     Iterator<T> it = begin_pos;
     ++it;
-    begin_pos.get_node()->next = end_pos.get_node();
+    begin_pos.get_node()->set_next(end_pos.get_node());
 
     while (it != end_pos) {
         if (it == this->begin()) {
@@ -140,10 +140,10 @@ void List<T>::clear() {
 template<typename T>
 bool List<T>::check_order() {
     Node<T>* cur_node = head;
-    while (cur_node->next != head) {
-        if (cur_node->data > cur_node->next->data)
+    while (cur_node->get_next() != head) {
+        if (cur_node->get_data() > cur_node->get_next()->get_data())
             return false;
-        cur_node = cur_node->next;
+        cur_node = cur_node->get_next();
     }
     return true;
 }
@@ -151,11 +151,11 @@ bool List<T>::check_order() {
 template<typename T>
 std::ostream& List<T>::operator<<(std::ostream& out) {
     Node<T>* cur_node = head;
-    while (cur_node->next != head) {
-        out << cur_node->data << ' ';
-        cur_node = cur_node->next;
+    while (cur_node->get_next() != head) {
+        out << cur_node->get_data() << ' ';
+        cur_node = cur_node->get_next();
     }
-    out << cur_node->data << ' ';
+    out << cur_node->get_data() << ' ';
     return out;
 }
 
@@ -163,10 +163,10 @@ template<typename T>
 List<T>::~List<T>() {
     if (head == nullptr)
         return;
-    Node<T>* cur_node = head->next;
+    Node<T>* cur_node = head->get_next();
     while (cur_node != head) {
         Node<T>* temp = cur_node;
-        cur_node = cur_node->next;
+        cur_node = cur_node->get_next();
         delete temp;
     }
     delete head;
